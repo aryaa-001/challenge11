@@ -1,22 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { useProducts } from "../context/productContext";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const { cartNumber } = useProducts();
+
+  const navigate = useNavigate()
 
   const baseClasses =
     "flex items-center justify-between px-4 py-2 rounded-lg text-sm font-medium transition";
 
   return (
-    <nav className="flex flex-col gap-2">
+    <nav className="flex ml-150 gap-2">
       <NavLink
         to="/"
         className={({ isActive }) =>
           `${baseClasses} ${
             isActive
-              ? "bg-white/20 text-white"
-              : "text-indigo-100 hover:bg-white/10 hover:text-white"
+               ? "bg-black text-white"
+              : "text-black hover:bg-yellow-400 hover:text-white"
           }`
         }
       >
@@ -28,38 +28,35 @@ const Navigation = () => {
         className={({ isActive }) =>
           `${baseClasses} ${
             isActive
-              ? "bg-white/20 text-white"
-              : "text-indigo-100 hover:bg-white/10 hover:text-white"
+              ? "bg-black text-white"
+              : "text-black hover:bg-yellow-400 hover:text-white"
           }`
         }
       >
         Shop
       </NavLink>
-
-      <NavLink
-        to="/cart"
-        className={({ isActive }) =>
-          `${baseClasses} ${
-            isActive
-              ? "bg-white/20 text-white"
-              : "text-indigo-100 hover:bg-white/10 hover:text-white"
-          }`
-        }
+      <button
+        onClick={() => {
+          localStorage.removeItem("authUser");
+          navigate("/login", { replace: true });
+        }}
+        className="
+    mt-auto
+    flex items-center gap-2
+    px-4 py-2
+    cursor-pointer
+    rounded-md
+    text-sm font-medium
+    border
+    text-red-600
+    hover:bg-red-50
+    hover:text-red-700
+    transition-colors
+  "
       >
-        <span>Cart</span>
+        Logout
+      </button>
 
-        {cartNumber > 0 && (
-          <span
-            className="ml-2 min-w-5 h-5 px-1
-                       flex items-center justify-center
-                       text-[11px] font-semibold
-                       rounded-full
-                       bg-pink-500 text-white"
-          >
-            {cartNumber}
-          </span>
-        )}
-      </NavLink>
     </nav>
   );
 };

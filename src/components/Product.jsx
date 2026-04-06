@@ -1,7 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addCardItem } from "../reducers/cartReducer";
-import { toggleWishlistItem } from "../reducers/wishlistReducer";
-
 export default function Product({ elem }) {
   return (
     <div className="group w-70 overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -60,21 +56,8 @@ export default function Product({ elem }) {
           </div>
 
           <div className="flex gap-2">
-            <button
-              disabled={isAddedToCart}
-              onClick={() => {
-                if (!isAddedToCart) {
-                  dispatch(addCardItem(elem));
-                }
-              }}
-              className={`rounded-lg text-sm font-medium transition
-                ${
-                  isAddedToCart
-                    ? "bg-green-100 text-green-700 px-3 py-1.5 border border-green-300 cursor-default"
-                    : "border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                }`}
-            >
-              {isAddedToCart ? "Added ✓" : "Add"}
+            <button className="rounded-lg text-sm font-medium transition border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-100 cursor-pointer">
+              Add
             </button>
 
             <button className="rounded-lg bg-black px-4 py-1.5 text-sm font-medium text-white transition hover:bg-gray-800">

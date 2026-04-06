@@ -2,10 +2,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./components/Login";
+import Home from "./components/Home";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserProvider } from "./context/userContext";
-import Home from "./components/Home";
+import Layout from "./components/Layout";
 import AllProducts from "./components/AllProducts";
 
 const router = createBrowserRouter([
@@ -21,12 +22,18 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <Home/>,
-      },
-      {
-        index: "/products",
-        element: <AllProducts/>
+        index: "/",
+        element: <Layout />,
+        children: [
+          {
+            path: "/home",
+            element: <Home/>
+          },
+          {
+            path: "/products",
+            element: <AllProducts />,
+          },
+        ],
       },
     ],
   },
